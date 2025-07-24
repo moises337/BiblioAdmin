@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block title %}Gestión de Préstamos{% endblock %}
+{% block content %}
+    <h1>Historial de Préstamos</h1>
+    <a href="{{ url_for('anadir_prestamo') }}" class="btn btn-primary">Registrar Nuevo Préstamo</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Libro</th>
+                <th>Miembro</th>
+                <th>Fecha Préstamo</th>
+                <th>Fecha Vencimiento</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prestamo in prestamos %}
+            <tr>
+                <td>{{ prestamo[1] }}</td>
+                <td>{{ prestamo[2] }}</td>
+                <td>{{ prestamo[3] }}</td>
+                <td>{{ prestamo[4] }}</td>
+                <td>
+                    {% if prestamo[5] %}
+                        Devuelto el {{ prestamo[5] }}
+                    {% else %}
+                        <span style="color: red; font-weight: bold;">Pendiente</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not prestamo[5] %}
+                    <form action="{{ url_for('devolver_prestamo', id=prestamo[0]) }}" method="post" style="display:inline; padding:0; box-shadow:none;">
+                        <button type="submit" class="btn btn-success btn-action">Marcar como Devuelto</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6">No hay préstamos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

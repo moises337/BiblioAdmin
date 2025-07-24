@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}Registrar Préstamo{% endblock %}
+{% block content %}
+    <h1>Registrar Nuevo Préstamo</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="libro_id">Libro (solo se muestran los disponibles)</label>
+            <select name="libro_id" id="libro_id" required>
+                <option value="">Seleccione un libro...</option>
+                {% for libro in libros %}
+                    <option value="{{ libro[0] }}">{{ libro[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="miembro_id">Miembro</label>
+            <select name="miembro_id" id="miembro_id" required>
+                <option value="">Seleccione un miembro...</option>
+                {% for miembro in miembros %}
+                    <option value="{{ miembro[0] }}">{{ miembro[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <p>El préstamo se registrará por 15 días.</p>
+        <button type="submit" class="btn btn-primary">Registrar Préstamo</button>
+    </form>
+{% endblock %}

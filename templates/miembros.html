@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}Gestión de Miembros{% endblock %}
+
+{% block content %}
+    <h1>Miembros de la Biblioteca</h1>
+    <a href="{{ url_for('anadir_miembro') }}" class="btn btn-primary">Añadir Nuevo Miembro</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Fecha de Registro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for miembro in miembros %}
+            <tr>
+                <td>{{ miembro[0] }}</td>
+                <td>{{ miembro[1] }}</td>
+                <td>{{ miembro[2] }}</td>
+                <td>{{ miembro[3].strftime('%d-%m-%Y') }}</td> {# Formateamos la fecha para mejor lectura #}
+                <td>
+                    <!-- Botón de eliminar con confirmación -->
+                    <form action="{{ url_for('eliminar_miembro', id=miembro[0]) }}" method="post" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar a este miembro?');">
+                        <button type="submit" class="btn btn-danger btn-action">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No hay miembros registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

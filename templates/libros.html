@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block title %}Gestión de Libros{% endblock %}
+
+{% block content %}
+    <h1>Catálogo de Libros</h1>
+    <a href="{{ url_for('anadir_libro') }}" class="btn btn-primary">Añadir Nuevo Libro</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Año</th>
+                <th>Disponibles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro[0] }}</td>
+                <td>{{ libro[1] }}</td>
+                <td>{{ libro[2] }}</td>
+                <td>{{ libro[3] }}</td>
+                <td>{{ libro[4] }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No hay libros registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

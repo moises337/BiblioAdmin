@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard - BiblioAdmin{% endblock %}
+
+{% block content %}
+    <h1>Panel de Control</h1>
+    <div class="card-container">
+        <div class="card">
+            <h3>Total de Libros</h3>
+            <p class="number">{{ total_libros }}</p>
+        </div>
+        <div class="card">
+            <h3>Total de Miembros</h3>
+            <p class="number">{{ total_miembros }}</p>
+        </div>
+        <div class="card">
+            <h3>Préstamos Activos</h3>
+            <p class="number">{{ prestamos_activos }}</p>
+        </div>
+    </div>
+{% endblock %}
