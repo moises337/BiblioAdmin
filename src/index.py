@@ -63,6 +63,43 @@ def anadir_miembro():
             
     return render_template('formulario_miembro.html')
 
+@app.route('/miembros/<int:id>/editar', methods=['GET', 'POST'])
+def editar_miembro(id):
+    if request.method == 'POST':
+        # Procesar los datos del formulario enviado
+        nombre = request.form['nombre']
+        email = request.form['email']
+        try:
+            db.execute_query(
+                "UPDATE miembros SET nombre = %s, email = %s WHERE id = %s;",
+                (nombre, email, id)
+            )
+            flash('¡Miembro actualizado con éxito!', 'success')
+            return redirect(url_for('listar_miembros'))
+        except Exception as e:
+            flash(f'Error al actualizar el miembro: {e}', 'danger')
+            return redirect(url_for('editar_miembro', id=id))
+
+    # Si es GET, buscar el miembro y mostrar el formulario
+    miembro = db.execute_query("SELECT * FROM miembros WHERE id = %s;", (id,), fetch="one")
+    if not miembro:
+        flash('Miembro no encontrado.', 'warning')
+        return redirect(url_for('listar_miembros'))
+    
+    return render_template('editar_miembro.html', miembro=miembro)
+
+@app.route('/miembros/<int:id>/eliminar', methods=['POST'])
+def eliminar_miembro(id):
+    try:
+        # Una buena práctica sería verificar si el miembro tiene préstamos activos antes de borrar.
+        # Por ahora, la restricción de la BD (ON DELETE CASCADE) lo manejará.
+        db.execute_query("DELETE FROM miembros WHERE id = %s;", (id,))
+        flash('Miembro eliminado correctamente.', 'success')
+    except Exception as e:
+        flash(f'Error al eliminar el miembro: {e}', 'danger')
+    
+    return redirect(url_for('listar_miembros'))
+
 # --- Rutas para Préstamos ---
 @app.route('/prestamos')
 def listar_prestamos():
@@ -118,3 +155,4 @@ def devolver_prestamo(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
+

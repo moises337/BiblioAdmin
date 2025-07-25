@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Editar Miembro{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Editar Miembro</h2>
+    <a href="{{ url_for('listar_miembros') }}" class="btn btn-secondary">Cancelar y Volver</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <!-- El 'action' del formulario apunta a la misma URL para procesar el POST -->
+        <form action="{{ url_for('editar_miembro', id=miembro[0]) }}" method="POST">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre Completo</label>
+                <!-- Usamos 'value' para pre-rellenar el campo con los datos actuales del miembro -->
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{ miembro[1] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ miembro[2] }}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

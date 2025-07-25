@@ -26,14 +26,18 @@
                 <tbody>
                     {% for miembro in miembros %}
                     <tr>
-                        <td>{{ miembro[0] }}</td>  <!-- id -->
-                        <td>{{ miembro[1] }}</td>  <!-- nombre -->
-                        <td>{{ miembro[2] }}</td>  <!-- email -->
-                        <td>{{ miembro[3].strftime('%d-%m-%Y') if miembro[3] else 'N/A' }}</td> <!-- fecha_registro -->
+                        <td>{{ miembro[0] }}</td>
+                        <td>{{ miembro[1] }}</td>
+                        <td>{{ miembro[2] }}</td>
+                        <td>{{ miembro[3].strftime('%d-%m-%Y') if miembro[3] else 'N/A' }}</td>
                         <td>
-                            <!-- Placeholders para futuras acciones -->
-                            <a href="#" class="btn btn-sm btn-outline-secondary disabled">Editar</a>
-                            <a href="#" class="btn btn-sm btn-outline-danger disabled">Eliminar</a>
+                            <!-- Botón de Editar que apunta a la ruta de edición -->
+                            <a href="{{ url_for('editar_miembro', id=miembro[0]) }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            
+                            <!-- Formulario para el botón de Eliminar que se envía vía POST -->
+                            <form action="{{ url_for('eliminar_miembro', id=miembro[0]) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar a este miembro?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                            </form>
                         </td>
                     </tr>
                     {% endfor %}
