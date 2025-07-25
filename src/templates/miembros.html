@@ -26,10 +26,10 @@
                 <tbody>
                     {% for miembro in miembros %}
                     <tr>
-                        <td>{{ miembro.id }}</td>
-                        <td>{{ miembro.nombre }}</td>
-                        <td>{{ miembro.email }}</td>
-                        <td>{{ miembro.fecha_registro.strftime('%d-%m-%Y') if miembro.fecha_registro else 'N/A' }}</td>
+                        <td>{{ miembro[0] }}</td>  <!-- id -->
+                        <td>{{ miembro[1] }}</td>  <!-- nombre -->
+                        <td>{{ miembro[2] }}</td>  <!-- email -->
+                        <td>{{ miembro[3].strftime('%d-%m-%Y') if miembro[3] else 'N/A' }}</td> <!-- fecha_registro -->
                         <td>
                             <!-- Placeholders para futuras acciones -->
                             <a href="#" class="btn btn-sm btn-outline-secondary disabled">Editar</a>

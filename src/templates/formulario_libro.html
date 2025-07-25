@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Añadir Nuevo Libro{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Añadir Nuevo Libro</h2>
+    <a href="{{ url_for('listar_libros') }}" class="btn btn-secondary">Volver al Catálogo</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="{{ url_for('anadir_libro') }}" method="POST">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título del Libro</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ej: El Señor de los Anillos" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" class="form-control" id="autor" name="autor" placeholder="Ej: J.R.R. Tolkien" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="anio" class="form-label">Año de Publicación</label>
+                    <input type="number" class="form-control" id="anio" name="anio" placeholder="Ej: 1954">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cantidad" class="form-label">Cantidad Disponible</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ej: 5" required min="0">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Libro</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

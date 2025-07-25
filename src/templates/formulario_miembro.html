@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Añadir Nuevo Miembro{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Añadir Nuevo Miembro</h2>
+    <a href="{{ url_for('listar_miembros') }}" class="btn btn-secondary">Volver a la Lista</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form action="{{ url_for('anadir_miembro') }}" method="POST">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ej: juan.perez@ejemplo.com" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrar Miembro</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

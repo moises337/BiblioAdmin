@@ -39,6 +39,30 @@ def listar_miembros():
     miembros = db.execute_query("SELECT * FROM miembros ORDER BY nombre;", fetch="all")
     return render_template('miembros.html', miembros=miembros)
 
+@app.route('/miembros/nuevo', methods=['GET', 'POST'])
+def anadir_miembro():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        email = request.form['email']
+        
+        try:
+            # Comprobar si el email ya existe para evitar errores de base de datos
+            existe = db.execute_query("SELECT id FROM miembros WHERE email = %s;", (email,), fetch="one")
+            if existe:
+                flash('El correo electrónico ya está registrado.', 'warning')
+                return redirect(url_for('anadir_miembro'))
+
+            db.execute_query(
+                "INSERT INTO miembros (nombre, email) VALUES (%s, %s);",
+                (nombre, email)
+            )
+            flash('¡Miembro añadido con éxito!', 'success')
+            return redirect(url_for('listar_miembros'))
+        except Exception as e:
+            flash(f'Error al añadir miembro: {e}', 'danger')
+            
+    return render_template('formulario_miembro.html')
+
 # --- Rutas para Préstamos ---
 @app.route('/prestamos')
 def listar_prestamos():
