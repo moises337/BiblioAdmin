@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import database as db
 
-app = Flask(__name__)
+# Nueva línea modificada
+app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.secret_key = 'tu_clave_secreta_aqui' # Importante para que `flash` funcione
 
 @app.route('/')
