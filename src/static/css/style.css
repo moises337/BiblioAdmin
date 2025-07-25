@@ -1,74 +1,52 @@
-/* Estilo general del cuerpo */
 body {
-    background-color: #f8f9fa; /* Un gris muy claro para el fondo */
-    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la pantalla */
+    overflow-x: hidden; /* Previene el scroll horizontal */
 }
 
-/* Contenedor principal que usa Flexbox */
-.wrapper {
+#wrapper {
     display: flex;
-    align-items: stretch; /* Hace que ambos hijos (sidebar y content) tengan la misma altura */
 }
 
-/* Estilos de la Barra Lateral (Sidebar) */
-.sidebar {
-    width: 250px; /* Ancho fijo para la barra lateral */
-    min-height: 100vh; /* Ocupa toda la altura */
-    background: #2c3e50; /* Un azul oscuro */
-    color: #ecf0f1; /* Texto claro */
-    position: fixed; /* Fija la barra lateral para que no se desplace con el contenido */
-    left: 0;
-    top: 0;
-}
-
-.sidebar .sidebar-header {
-    padding: 20px;
-    background: #34495e; /* Un poco más claro para la cabecera */
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-.sidebar a, .sidebar a:hover, .sidebar a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #47748b;
-}
-
-.sidebar ul li a {
-    padding: 15px 20px;
-    font-size: 1.1em;
-    display: block;
-}
-
-.sidebar ul li a:hover {
-    color: #2c3e50;
-    background: #ecf0f1;
-}
-
-.sidebar ul li.active > a {
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    background-color: #343a40; /* bg-dark de bootstrap */
     color: #fff;
-    background: #1abc9c; /* Un color de acento para el elemento activo */
+    transition: margin .25s ease-out;
 }
 
+#sidebar-wrapper .sidebar-heading {
+    padding: 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #495057;
+}
 
-/* Estilos del Contenido Principal */
-.content-wrapper {
-    width: 100%; /* El contenido ocupa el 100% del espacio sobrante */
-    padding: 2rem;
-    margin-left: 250px; /* IMPORTANTE: Deja espacio para la barra lateral fija */
-    transition: all 0.3s;
+#sidebar-wrapper .list-group {
+    width: 250px;
+}
+
+#sidebar-wrapper .list-group-item {
+    border: none;
+    padding: 1rem 1.25rem;
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: #495057; /* Un gris un poco más claro */
+}
+
+#page-content-wrapper {
+    flex: 1; /* Esto hace que el contenido ocupe todo el espacio restante */
+    padding-left: 1rem;
+    width: calc(100% - 250px);
 }
 
 /* Estilos para las tarjetas del Dashboard */
 .card-container {
     display: flex;
-    gap: 1.5rem; /* Espacio entre las tarjetas */
+    gap: 1.5rem;
     justify-content: space-around;
+    flex-wrap: wrap; /* Para que se vea bien en pantallas pequeñas */
 }
 
 .card-container .card {
@@ -82,5 +60,5 @@ body {
 .card-container .card .number {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #1abc9c;
+    color: #0d6efd; /* Azul de bootstrap */
 }
